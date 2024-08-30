@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0"
+    >
+	<title>Login Sample</title>
+    <link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+    <header>
+        <h1>Login Sample</h1>
+    </header>
+    <main>
+        <!-- Login Section -->
+        <!-- Used for login in when you already have an account -->
+        <section class="login">
+            <h1>Login</h1>
+                <form action="">
+                    <div class="input-field">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="email"
+                        >
+                    </div>
+                    <div class="input-field">
+                        <label for="password">Senha</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password"
+                        >
+                    </div>
+                    <input 
+                        type="submit" 
+                        value="Entrar"
+                    >
+                </form>
+        </section>
+
+        <!-- Register Section -->
+        <!-- Used for registering in when you don't have an account -->
+        <section class="register">
+            <h1>Cadastre-se</h1>
+            <form action="">
+                <div class="input-field">
+                    <label for="name">Nome</label>
+                    <input 
+                        type="text" 
+                        name="name" 
+                        id="name"
+                    >
+                </div>
+                <div class="input-field">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email"
+                    >
+                </div>
+                <div class="input-field">
+                    <label for="password">Senha</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password"
+                    >
+                </div>
+                <div class="input-field">
+                    <label for="password-repeat">Repetir senha</label>
+                    <input 
+                        type="password" 
+                        name="password-repeat" 
+                        id="password-repeat"
+                    >
+                </div>
+                <input 
+                    type="submit" 
+                    value="Cadastrar"
+                >
+            </form>
+        </section>
+
+        <!-- Signup Banner -->
+        <!-- Used for displaying a button to present the signup section -->
+        <!-- Or to present the login section, depending on context -->
+        <section class="signup-signin-banner">
+            <div class="signup-banner-text">
+                <h1>Não tem uma conta?</h1>
+                <button>Cadastre-se</button>
+            </div>
+            <div class="signin-banner-text hidden">
+                <h1>Já tem uma conta?</h1>
+                <button>Login</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>
+            <li>
+                <a href="mailto:stocker.bobato@gmail.com">
+                    E-Mail Me
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/CarlosBobato">
+                    Check my GitHub
+                </a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/carlos-bobato-875291125/">
+                    Check my LinkedIn
+                </a>
+            </li>
+            <li>
+                <a href="https://stockerbobato.wixsite.com/portfolio">
+                    Check my Deisgn Portfolio
+                </a>
+            </li>
+        </p>
+        <p>&copy; 2024 - Login Sample - Carlos Stocker Bobato</p>
+    </footer>
+    <script src="scripts/index.js"></script>
+</body>
+</html>

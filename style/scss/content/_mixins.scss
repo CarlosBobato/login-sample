@@ -1,0 +1,38 @@
+@mixin flex($direction, $justify, $align) {
+    display: flex;
+    flex: 1;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin input-field(){
+    @include flex(row, space-evenly, center);
+    
+    width: 100%;
+    height: 100%;
+
+    margin: 0.5rem 0.5rem;
+
+    & label{
+        width: 30%;
+
+        text-align: left;
+        line-break: loose;
+    }
+
+    & input{
+        width: 60%;
+
+        text-align: left;
+    }
+}
+
+@mixin button(){
+    width: 100%;
+    
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    margin: 0.5rem 0.5rem;
+}

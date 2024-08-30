@@ -1,0 +1,127 @@
+ @import 'mixins';
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #3D3D3D;
+
+    @include flex(column, space-between, center);
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    min-width: 100vw;
+    min-width: 100dvw;
+}
+
+header, footer {
+    min-width: 100vw;
+    min-width: 100dvw;
+
+    max-height: 10vh;
+    max-height: 10dvh;
+
+    @include flex(row, space-between, center);
+}
+
+main {
+    min-width: 100vw;
+    min-width: 100dvw;
+
+    @include flex(row, center, center);
+}
+
+.register, .login{
+    @include flex(column, space-evenly, center);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @media (orientation: landscape) {
+        max-width: 45vw;
+        max-width: 45dvw;
+    
+        min-height: 50%;
+        max-height: 90%;
+    
+        width: 50rem;
+    }
+
+    @media (orientation: portrait) {
+        max-width: 90vw;
+        max-width: 90dvw;
+    
+        height: 50%;
+    }
+
+    position: absolute;
+
+    background-color: azure;
+
+    & input[type='submit'] {
+        @include button();
+    }
+}
+
+.register {
+    @media (orientation: landscape) {
+        left: 50%;
+    }
+    @media (orientation: portrait) {
+        bottom: 50%;
+    }
+}
+
+.login{
+    @media (orientation: landscape) {
+        right: 50%;    
+    }
+    @media (orientation: portrait) {
+        top: 50%;
+    }
+}
+
+.signup-signin-banner {
+    @include flex(row, space-evenly, center);
+
+    @media (orientation: landscape) {
+        max-width: 45vw;
+        max-width: 45dvw;
+    
+        min-height: 50%;
+        max-height: 90%;
+    
+        width: 50rem;
+    }
+
+    @media (orientation: portrait) {
+        max-width: 90vw;
+        max-width: 90dvw;
+    
+        height: 50%;
+    }
+
+    padding: 0rem 1rem;
+    
+    position: absolute;
+
+    background-color: brown;
+
+    & button{
+        @include button();
+    }
+}
+
+.signup-banner-text, .signin-banner-text {
+    @include flex(column, space-evenly, center);
+    width: 100%;
+}
+
+.hidden{
+    visibility: collapse;
+}
+
+.input-field{
+    @include input-field();
+}
