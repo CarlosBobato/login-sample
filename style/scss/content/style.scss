@@ -1,4 +1,15 @@
- @import 'mixins';
+@import 'mixins';
+@import 'animations';
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    text-decoration: none;
+    list-style: none;
+
+}
 
 body {
     margin: 0;
@@ -19,22 +30,70 @@ header, footer {
     min-width: 100vw;
     min-width: 100dvw;
 
-    max-height: 10vh;
-    max-height: 10dvh;
+    background-color: pink;
+
+    & > ul{
+
+        @media (orientation: landscape){
+            @include flex(row, space-evenly, center);
+        }
+
+        @media (orientation: portrait){
+            & > li{
+             margin: 0.5rem 0rem;   
+            }
+        }
+
+        list-style-type: none;
+
+        & > a {
+            underline: none;
+            color: black;
+        }
+
+    }
+    
 
     @include flex(row, space-between, center);
+}
+
+header {
+    max-height: 10vh;
+    max-height: 10dvh;
+    height: 30rem;
+}
+
+footer {
+
+    text-align: center;
+
+    & > ul{
+        text-align: left;
+    }
+
+    @media (orientation: landscape) {
+        max-height: 10vh;
+        max-height: 10dvh;
+
+        height: 30rem;
+    }
+
+    @media (orientation: portrait) {
+        height: fit-content;
+    }
 }
 
 main {
     min-width: 100vw;
     min-width: 100dvw;
 
+    min-height: 90vh;
+    min-height: 90dvh;
+
     @include flex(row, center, center);
 }
 
 .register, .login{
-    @include flex(column, space-evenly, center);
-
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -46,13 +105,19 @@ main {
         max-height: 90%;
     
         width: 50rem;
+
+        @include flex(column, space-evenly, center);
     }
 
     @media (orientation: portrait) {
-        max-width: 90vw;
-        max-width: 90dvw;
+        max-width: 80vw;
+        max-width: 80dvw;
+
+        width: 40rem;
     
-        height: 50%;
+        height: 40%;
+
+        @include flex(column, center, center);
     }
 
     position: absolute;
@@ -96,10 +161,12 @@ main {
     }
 
     @media (orientation: portrait) {
-        max-width: 90vw;
-        max-width: 90dvw;
+        max-width: 80vw;
+        max-width: 80dvw;
+
+        width: 40rem;
     
-        height: 50%;
+        height: 40%;
     }
 
     padding: 0rem 1rem;
@@ -111,6 +178,8 @@ main {
     & button{
         @include button();
     }
+
+    transition: all 0.3s ease-in-out;
 }
 
 .signup-banner-text, .signin-banner-text {

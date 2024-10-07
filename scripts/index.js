@@ -1,6 +1,22 @@
+/**
+ * @author Carlos Bobato
+ * @class LoginScreen
+ * @description This class is responsible for setting up the events for the login screen
+ * */
 let LoginScreen = function (){
+    /**
+     * @author Carlos Bobato
+     * @inner LoginScreen
+     * @type {this} self - The object itself
+     * */
     const self = this;
 
+    /**
+     * @author Carlos Bobato
+     * @inner LoginScreen
+     * @type {Object} elements - The elements on the DOM
+     * @description This object stores all the elements on the DOM
+     * */
     self.elements = {
         login: document.getElementsByClassName('login')[0],
         register: document.getElementsByClassName('register')[0],
@@ -9,23 +25,51 @@ let LoginScreen = function (){
         signinBanner: document.getElementsByClassName('signin-banner-text')[0]
     }
 
+    /**
+     * @author Carlos Bobato
+     * @inner LoginScreen
+     * @function setEvents
+     * @description This function sets up the events
+     * */
     self.setEvents = function(){
+
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'login' elements is on the DOM
+         * */
         if(!self.elements.login){
             console.error("No 'login' element found on DOM, please check your HTML");
             return false;
         }
 
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'register' elements is on the DOM
+         * */
         if(!self.elements.register){
             console.error("No 'register' element found on DOM, please check your HTML");
             return false;
         }
 
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'signup-signin-banner' elements is on the DOM
+         * */
         if(!self.elements.banner){
             console.error("No 'signup-signin-banner' element found on DOM, please check your HTML");
             return false;
         }
 
+        /**
+         * @author Carlos Bobato
+         * @type {HTMLFormElement} formLogin - The 'login' form
+         * */
         const formLogin = self.elements.login.getElementsByTagName('form')[0];
+        
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'form login' element is on the DOM
+         * */
         if(!formLogin){
             console.error("No 'form' element found on DOM, please check your HTML");
             return false;
@@ -33,7 +77,16 @@ let LoginScreen = function (){
 
         self.elements.formLogin = formLogin;
 
+        /**
+         * @author Carlos Bobato
+         * @type {HTMLFormElement} formRegister - The 'register' form
+         * */
         const formRegister = self.elements.register.getElementsByTagName('form')[0];
+
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'form register' element is on the DOM
+         * */
         if(!formRegister){
             console.error("No 'form' element found on DOM, please check your HTML");
             return false;
@@ -49,6 +102,10 @@ let LoginScreen = function (){
             event.preventDefault();
         }
 
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'signup-banner-text' element is on the DOM
+         * */
         if(!self.elements.signupBanner){
             console.error("No 'signup-banner-text' element found on DOM, please check your HTML");
             return false;
@@ -56,6 +113,10 @@ let LoginScreen = function (){
 
         self.elements.signupBannerButton = self.elements.signupBanner.getElementsByTagName('button')[0];
 
+        /**
+         * @author Carlos Bobato
+         * @description This validator checks if the 'signin-banner-text' element is on the DOM
+         * */
         if(!self.elements.signinBanner){
             console.error("No 'signin-banner-text' element found on DOM, please check your HTML");
             return false;
@@ -63,38 +124,105 @@ let LoginScreen = function (){
 
         self.elements.signinBannerButton = self.elements.signinBanner.getElementsByTagName('button')[0];
 
+        /**
+         * @author Carlos Bobato
+         * @inner setEvents
+         * @function onClickSigninBannerButton
+         * @description Changes the banner from 'signin' to 'register'
+         * */
         self.elements.signinBannerButton.onclick = function(event){
             event.preventDefault();
-            console.log("Oppening register screen...");
+            console.log("Oppening register screen...", "onClickSigninBannerButton");
 
             self.elements.signupBanner.classList.remove('hidden');
             self.elements.signinBanner.classList.add('hidden');
-
-            if(window.orientation === 0 || window.orientation === 180){
-                self.elements.banner.style.bottom = "unset";
-                self.elements.banner.style.top = "50%";   
+            
+            /**
+             * @author Carlos Bobato
+             * @description Checks if the screen is portrait or landscape
+             * */            
+            if(window.innerHeight > window.innerWidth){
+                console.log("screen is portrait");
+                self.elements.banner.style.transform = "translateY(0%)";   
             }
             else{
-                self.elements.banner.style.right = "unset";
+                console.log("screen is landscape");
                 self.elements.banner.style.left = "50%";
+                self.elements.banner.style.right = "unset";
+                self.elements.banner.style.top = "unset";
+                self.elements.banner.style.bottom = "unset";
             }
+
         }
 
+        /**
+         * @author Carlos Bobato
+         * @inner setEvents
+         * @function onClickSignupBannerButton
+         * @description Changes the banner from 'register' to 'signin'
+         * */
         self.elements.signupBannerButton.onclick = function(event){
             event.preventDefault();
-            console.log("Oppening login screen...");
+            console.log("Oppening login screen...", "onClickSignupBannerButton");
 
             self.elements.signupBanner.classList.add('hidden');
             self.elements.signinBanner.classList.remove('hidden');
 
-            if(window.orientation === 0 || window.orientation === 180){
-                self.elements.banner.style.bottom = "50%";
-                self.elements.banner.style.top = "unset";
+            /**
+             * @author Carlos Bobato 
+             * @description Checks if the screen is portrait or landscape
+             * */
+            if(window.innerHeight > window.innerWidth){
+                console.log("screen is portrait");
+                self.elements.banner.style.transform = "translateY(100%)"
             }
             else{
+                console.log("screen is landscape");
+                //self.elements.banner.style.tranform = "translateX(50%)";
                 self.elements.banner.style.right = "50%";
                 self.elements.banner.style.left = "unset";
+                self.elements.banner.style.top = "unset";
+                self.elements.banner.style.bottom = "unset";
             }
+        }
+
+        /**
+         * @author Carlos Bobato
+         * @inner setEvents
+         * @function onResize
+         * @description Changes the banner behaviour based on if the screen is portrait or landscape
+         * */
+        window.onresize = function(){
+            
+            if(self.elements.signinBanner.classList.contains('hidden')){
+                if(window.innerHeight > window.innerWidth){
+                    self.elements.banner.style.bottom = "50%";
+                    self.elements.banner.style.top = "unset";
+                    self.elements.banner.style.left = "unset";
+                    self.elements.banner.style.right = "unset";
+                }
+                else{
+                    self.elements.banner.style.left = "50%";
+                    self.elements.banner.style.right = "unset";
+                    self.elements.banner.style.top = "unset";
+                    self.elements.banner.style.bottom = "unset";
+                }
+            }
+            else{
+                if(window.innerHeight > window.innerWidth){
+                    self.elements.banner.style.top = "50%";
+                    self.elements.banner.style.bottom = "unset";
+                    self.elements.banner.style.left = "unset";
+                    self.elements.banner.style.right = "unset";
+                }
+                else{
+                    self.elements.banner.style.right = "50%";
+                    self.elements.banner.style.left = "unset";
+                    self.elements.banner.style.top = "unset";
+                    self.elements.banner.style.bottom = "unset";
+                }
+            }
+
         }
 
         console.log('Events loaded');
@@ -102,27 +230,44 @@ let LoginScreen = function (){
         return true;
     }
 
+    /**
+     * @author Carlos Bobato
+     * @inner LoginScreen
+     * @function init
+     * @description This function initializes the login screen
+     * */
     self.init = function (){
         self.setEvents();
 
-        if(window.orientation === 0 || window.orientation === 180){
+        if(window.innerHeight > window.innerWidth){
             console.log('screen is portrait');
         }
         else{
             console.log('screen is landscape');
         }
 
-        // Identifies if the screen is portrait
-        if(window.orientation === 0 || window.orientation === 180){
+        /**
+         * @author Carlos Bobato
+         * @description Checks if the screen is portrait or landscape
+         * */
+        if(window.innerHeight > window.innerWidth){
             self.elements.banner.style.bottom = "50%";
         }
         else{
-            // Assumes that the banner is on the right or 'loging-in'
+            /**
+             * @author Carlos Bobato
+             * @description Assumes that the banner is on the right or 'loging-in'
+             * */
             self.elements.banner.style.left = "50%";
         }
     }
 }
 
+/**
+ * @author Carlos Bobato
+ * @constructor LoginScreen
+ * @description This function is responsible for initializing the login screen
+ * */
 var login = new  LoginScreen();
 
 login.init();
