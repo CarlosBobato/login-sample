@@ -28,6 +28,22 @@ let LoginScreen = function (){
     /**
      * @author Carlos Bobato
      * @inner LoginScreen
+     * @type {Object} model - The model of the login screen
+     * @description This object stores all the data of the login screen
+     * */
+    self.model = {
+        /**
+         * @author Carlos Bobato
+         * @inner LoginScreen
+         * @type {boolean} mobileFirst - If the screen was mobile/portrait when first loaded the page
+         * @description If the screen was mobile/portrait when first loaded the page
+         * */
+        mobileFirst: false,
+    }
+
+    /**
+     * @author Carlos Bobato
+     * @inner LoginScreen
      * @function setEvents
      * @description This function sets up the events
      * */
@@ -136,21 +152,28 @@ let LoginScreen = function (){
 
             self.elements.signupBanner.classList.remove('hidden');
             self.elements.signinBanner.classList.add('hidden');
-            
+
             /**
              * @author Carlos Bobato
              * @description Checks if the screen is portrait or landscape
              * */            
             if(window.innerHeight > window.innerWidth){
                 console.log("screen is portrait");
-                self.elements.banner.style.transform = "translateY(0%)";   
+                if(self.model.mobileFirst){
+                    self.elements.banner.style.transform = "translate(0%, 0%)";
+                }else{
+                    self.elements.banner.style.transform = "translate(-50%, -56%)";
+                }
+                 
             }
             else{
                 console.log("screen is landscape");
-                self.elements.banner.style.left = "50%";
-                self.elements.banner.style.right = "unset";
-                self.elements.banner.style.top = "unset";
-                self.elements.banner.style.bottom = "unset";
+                if(self.model.mobileFirst){
+                    self.elements.banner.style.transform = "translate(50%, 52.5%)";
+                }else{
+                    self.elements.banner.style.transform = "translate(0%, 0%)";    
+                }
+                
             }
 
         }
@@ -167,6 +190,7 @@ let LoginScreen = function (){
 
             self.elements.signupBanner.classList.add('hidden');
             self.elements.signinBanner.classList.remove('hidden');
+            self.elements.banner.style.transform = "initial";
 
             /**
              * @author Carlos Bobato 
@@ -174,15 +198,19 @@ let LoginScreen = function (){
              * */
             if(window.innerHeight > window.innerWidth){
                 console.log("screen is portrait");
-                self.elements.banner.style.transform = "translateY(100%)"
+                if(self.model.mobileFirst){
+                    self.elements.banner.style.transform = "translate(0%, 100%)";
+                }else{
+                    self.elements.banner.style.transform = "translate(-50%, 45%)";    
+                }
             }
             else{
                 console.log("screen is landscape");
-                //self.elements.banner.style.tranform = "translateX(50%)";
-                self.elements.banner.style.right = "50%";
-                self.elements.banner.style.left = "unset";
-                self.elements.banner.style.top = "unset";
-                self.elements.banner.style.bottom = "unset";
+                if(self.model.mobileFirst){
+                    self.elements.banner.style.transform = "translate(-50%, 52.5%)";
+                }else{
+                    self.elements.banner.style.transform = "translate(-100%, 0%)";    
+                }
             }
         }
 
@@ -194,32 +222,46 @@ let LoginScreen = function (){
          * */
         window.onresize = function(){
             
+            self.elements.banner.style.transform = "initial";
+
+            /**
+             * @author Carlos Bobato
+             * @description Checks if the banner is currently set to 'signup'
+             * */
             if(self.elements.signinBanner.classList.contains('hidden')){
                 if(window.innerHeight > window.innerWidth){
-                    self.elements.banner.style.bottom = "50%";
-                    self.elements.banner.style.top = "unset";
-                    self.elements.banner.style.left = "unset";
-                    self.elements.banner.style.right = "unset";
+                    console.log("screen is portrait");
+                    if(self.model.mobileFirst){
+                        self.elements.banner.style.transform = "translate(0%, 0%)";
+                    }else{
+                        self.elements.banner.style.transform = "translate(-50%, -56%)";    
+                    }
                 }
                 else{
-                    self.elements.banner.style.left = "50%";
-                    self.elements.banner.style.right = "unset";
-                    self.elements.banner.style.top = "unset";
-                    self.elements.banner.style.bottom = "unset";
+                    console.log("screen is landscape");
+                    if (self.model.mobileFirst){
+                        self.elements.banner.style.transform = "translate(50%, 52.5%)";
+                    }else{
+                        self.elements.banner.style.transform = "translate(0%, 0%)";    
+                    }
                 }
             }
             else{
                 if(window.innerHeight > window.innerWidth){
-                    self.elements.banner.style.top = "50%";
-                    self.elements.banner.style.bottom = "unset";
-                    self.elements.banner.style.left = "unset";
-                    self.elements.banner.style.right = "unset";
+                    console.log("screen is portrait");
+                    if(self.model.mobileFirst){
+                        self.elements.banner.style.transform = "translate(0%, 100%)";
+                    }else{
+                        self.elements.banner.style.transform = "translate(-50%, 50%)";    
+                    }
                 }
                 else{
-                    self.elements.banner.style.right = "50%";
-                    self.elements.banner.style.left = "unset";
-                    self.elements.banner.style.top = "unset";
-                    self.elements.banner.style.bottom = "unset";
+                    console.log("screen is landscape");
+                    if(self.model.mobileFirst){
+                        self.elements.banner.style.transform = "translate(-50%, 52.5%)";
+                    }else{
+                        self.elements.banner.style.transform = "translate(-100%, 0%)";    
+                    }
                 }
             }
 
@@ -237,6 +279,11 @@ let LoginScreen = function (){
      * @description This function initializes the login screen
      * */
     self.init = function (){
+
+        if (window.innerHeight > window.innerWidth){
+            self.model.mobileFirst = true;
+        }
+
         self.setEvents();
 
         if(window.innerHeight > window.innerWidth){
